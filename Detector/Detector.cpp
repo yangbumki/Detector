@@ -99,17 +99,37 @@ int DETECTOR::CompareTarget(const Mat* src, const Mat* mask, float threadShold, 
 
 	int cnt = 0;
 
+	vector<Rect> rects;
+	bool dup = false;
+
 	for (int row = 0; row < ret.rows; row++) {
 		for (int col = 0; col < ret.cols; col++) {
 			if (ret.at<float>(row, col) > threadShold) {
 				Rect rc{};
+
 				rc.x = col;
 				rc.y = row;
 				rc.width = 10;
 				rc.height = 10;
 
-				rectangle(*src, rc, Scalar(0, 0, 255));
-				cnt++;
+				for (const auto& rect : rects) {
+					//2024-08-17 겹칠경우 무조건 x 점이 교차하게되어있음
+					if (rect.x <= rc.x && rc.x <= (rect.x + rect.width)) {
+						if (rect.y <= rc.y && rc.y <= (rect.y + rect.height)) {
+							WarningMessage("This target aleady been detected");
+							dup = true;
+							break;
+						}
+					}
+				}
+
+				if (!dup) {
+					rectangle(*src, rc, Scalar(0, 0, 255));
+					rects.push_back(rc);
+					cnt++;
+				}
+
+				dup = false;
 			}
 		}
 	}

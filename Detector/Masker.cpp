@@ -119,6 +119,11 @@ void MASKER::GetRectRangeMaskWithGUI(std::vector<uchar>& image, const Size& size
 			}
 		}
 
+		if (pointers.empty()) {
+			destroyAllWindows();
+			return;
+		}
+
 		cout << "===POINT1=== \n";
 		cout << "pointers[0].x : " << pointers[0].x << endl;
 		cout << "pointers[0].y : " << pointers[0].y << endl;

@@ -9,6 +9,8 @@
 
 #define ESC			27
 
+#pragma comment(lib, "opencv_world4100.lib")
+
 int main() {
 	Capture capture;
 	Detector detector;
@@ -222,14 +224,17 @@ int main() {
 					}
 
 					if (_kbhit()) {
-						delete(maxCnt);
-						delete(prescision);
-						if (_getch() == ESC) break;
+						
+						if (_getch() == ESC) {
+							delete(maxCnt);
+							delete(prescision);
+							break;
+						}
 					}
 				}
 				break;
 			}
-			default:o
+			default:
 				break;
 			}
 			break;
