@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{2fcc384c-669b-4746-97ce-6a34b50742e0}</ProjectGuid>
-    <RootNamespace>Detector</RootNamespace>
+    <ProjectGuid>{8b78b7dd-b33b-43fb-b4f3-a32df6083515}</ProjectGuid>
+    <RootNamespace>Alarm</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -70,12 +70,6 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <ExternalIncludePath>H:\opencv\build\include;$(ExternalIncludePath)</ExternalIncludePath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <ExternalIncludePath>H:\opencv\build\include;$(ExternalIncludePath)</ExternalIncludePath>
-  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -114,7 +108,6 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>H:\opencv\build\x64\vc16\lib\opencv_world4100d.lib;H:\opencv\build\x64\vc16\lib\opencv_world4100.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -131,21 +124,14 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>H:\opencv\build\x64\vc16\lib\opencv_world4100.lib;H:\opencv\build\x64\vc16\lib\opencv_world4100d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Capture.cpp" />
-    <ClCompile Include="Detector.cpp" />
-    <ClCompile Include="InterNetwork.cpp" />
+    <ClCompile Include="Alarm.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Masker.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Capture.h" />
-    <ClInclude Include="Detector.h" />
-    <ClInclude Include="InterNetwork.h" />
-    <ClInclude Include="Masker.h" />
+    <ClInclude Include="Alarm.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

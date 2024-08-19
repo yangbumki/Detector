@@ -1,11 +1,12 @@
+#include "InterNetwork.h"
+#include "Capture.h"
+#include "Detector.h"
+#include "Masker.h"
+
 #include <iostream>
 #include <conio.h>
 
 #include <windows.h>
-
-#include "Capture.h"
-#include "Detector.h"
-#include "Masker.h"
 
 #define ESC			27
 
@@ -15,6 +16,14 @@ int main() {
 	Capture capture;
 	Detector detector;
 	Masker masker;
+	InterNetwork interNet;
+
+	interNet.SetData("NONE");
+
+	if (!interNet.Open("0.0.0.0", 8986)) {
+		cerr << "Failed to open\n";
+		return -1;
+	}
 
 	CaptureInfo capInfo{};
 
@@ -197,6 +206,10 @@ int main() {
 				while (1) {
 					Sleep(100);
 
+					if (interNet.GetData().compare("FINDED") == 0) {
+						interNet.SetData("NONE");
+					}
+
 					capInfo = capture.CaptureScreen();
 					masker.CreateMask(capInfo.bitmapDatas, Size(capInfo.width, capInfo.height), masker.GetCurrenRect());
 
@@ -209,9 +222,9 @@ int main() {
 
 						if (cnt >= maxCnt[idx]) {
 							cout << "Detected!!!" << endl;
-							
-							MessageBeep(-1);
-							MessageBoxA(NULL, "DETECTED", "DETECTED", NULL);
+							interNet.SetData("FINDED");
+							/*MessageBeep(-1);
+							MessageBoxA(NULL, "DETECTED", "DETECTED", NULL);*/
 
 						}
 

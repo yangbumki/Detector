@@ -93,7 +93,17 @@ int DETECTOR::CompareTarget(const Mat* src, const Mat* mask, float threadShold, 
 		return -1;
 	}
 
+	//UMat uSrc{}, uMask{}, uTarget{}, uRet{};
+
+	//uSrc = src->getUMat(ACCESS_READ);
+	///*uMask = mask->getUMat(ACCESS_READ);*/
+	//uTarget = target->getUMat(ACCESS_READ);
+
+	//mask == nullptr ? matchTemplate(uSrc, uTarget, uRet, TM_CCOEFF_NORMED) : matchTemplate(uSrc, uTarget, uRet, TM_CCOEFF_NORMED, uMask);
+
 	Mat ret{};
+
+	/*ret = uRet.getMat(ACCESS_READ);*/
 
 	mask == nullptr ? matchTemplate(*src, *target, ret, TM_CCOEFF_NORMED) : matchTemplate(*src, *target, ret, TM_CCOEFF_NORMED, *mask);
 
